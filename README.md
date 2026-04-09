@@ -122,7 +122,7 @@ pyproject.toml : dependencies (just mlx + data utils, no torch)
 
 ### Can autoresearch-mlx run on an 8GB MacBook Air?
 
-Yes. autoresearch-mlx was specifically designed and benchmarked on an 8GB M3 MacBook Air. MLX uses Apple Silicon's unified memory, so all your RAM is available as VRAM — no OOM crashes like PyTorch MPS forks.
+Yes. autoresearch-mlx was specifically designed and benchmarked on an 8GB M3 MacBook Air. MLX uses Apple Silicon's unified memory, so all your RAM is available as VRAM - no OOM crashes like PyTorch MPS forks.
 
 ### What's the difference between autoresearch-mlx and the original autoresearch?
 
