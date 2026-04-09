@@ -1,5 +1,10 @@
 # autoresearch-mlx
 
+[![GitHub stars](https://img.shields.io/github/stars/SingggggYee/autoresearch-mlx)](https://github.com/SingggggYee/autoresearch-mlx/stargazers)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
+[![Apple Silicon](https://img.shields.io/badge/Apple%20Silicon-M1%20%7C%20M2%20%7C%20M3%20%7C%20M4-black?logo=apple)](https://support.apple.com/en-us/116943)
+
 **autoresearch for every Mac**: from 8GB MacBook Air to 192GB Mac Studio.
 
 A native [MLX](https://github.com/ml-explore/mlx) port of Andrej Karpathy's [autoresearch](https://github.com/karpathy/autoresearch). Give an AI agent a small but real LLM training setup and let it experiment autonomously overnight: no NVIDIA GPU required.
@@ -112,6 +117,28 @@ pyproject.toml : dependencies (just mlx + data utils, no torch)
 
 - [Andrej Karpathy](https://github.com/karpathy) for the original [autoresearch](https://github.com/karpathy/autoresearch) concept and [nanochat](https://github.com/karpathy/nanochat) codebase
 - [Apple MLX team](https://github.com/ml-explore/mlx) for the framework
+
+## FAQ
+
+### Can autoresearch-mlx run on an 8GB MacBook Air?
+
+Yes. autoresearch-mlx was specifically designed and benchmarked on an 8GB M3 MacBook Air. MLX uses Apple Silicon's unified memory, so all your RAM is available as VRAM — no OOM crashes like PyTorch MPS forks.
+
+### What's the difference between autoresearch-mlx and the original autoresearch?
+
+The original [autoresearch](https://github.com/karpathy/autoresearch) requires NVIDIA GPUs with CUDA and FlashAttention 3. autoresearch-mlx replaces the entire stack with [MLX](https://github.com/ml-explore/mlx), Apple's native framework for Apple Silicon, so it runs on any Mac with zero NVIDIA dependencies.
+
+### Does autoresearch-mlx require an NVIDIA GPU?
+
+No. autoresearch-mlx uses Apple's MLX framework and runs entirely on Apple Silicon (M1/M2/M3/M4). No NVIDIA GPU, no CUDA, no driver setup needed.
+
+### How many experiments can autoresearch-mlx run overnight?
+
+Each experiment takes about 5 minutes. That's roughly 12 experiments per hour, or about 100 experiments in an 8-hour overnight session. The AI agent autonomously iterates: modifying hyperparameters, running training, keeping improvements, and discarding regressions.
+
+### What LLM agents work with autoresearch-mlx?
+
+Any coding agent that can read files and run shell commands works: Claude Code, OpenAI Codex, Cursor, or similar tools. Point the agent at `program.md` and it will handle the rest autonomously.
 
 ## License
 
