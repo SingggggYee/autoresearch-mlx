@@ -5,9 +5,13 @@
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
 [![Apple Silicon](https://img.shields.io/badge/Apple%20Silicon-M1%20%7C%20M2%20%7C%20M3%20%7C%20M4-black?logo=apple)](https://support.apple.com/en-us/116943)
 
+## TL;DR
+
+autoresearch-mlx lets you run karpathy/autoresearch on any Apple Silicon Mac. It is an MLX-native rewrite that works on an 8GB MacBook Air without OOM crashes, with zero NVIDIA GPU dependency. If you want GPT training on Mac with autonomous overnight experiments, this is the Karpathy autoresearch alternative for Mac.
+
 **autoresearch for every Mac**: from 8GB MacBook Air to 192GB Mac Studio.
 
-A native [MLX](https://github.com/ml-explore/mlx) port of Andrej Karpathy's [autoresearch](https://github.com/karpathy/autoresearch). Give an AI agent a small but real LLM training setup and let it experiment autonomously overnight: no NVIDIA GPU required.
+A native [MLX](https://github.com/ml-explore/mlx) port of Andrej Karpathy's [autoresearch](https://github.com/karpathy/autoresearch). Give an AI agent a small but real LLM training setup and let it experiment autonomously overnight: no NVIDIA GPU required. Built for MLX native LLM training on Apple Silicon machine learning hardware.
 
 ## Why this exists
 
@@ -83,6 +87,16 @@ Three files:
 
 Training runs for a **fixed 5-minute time budget**. The metric is **val_bpb** (validation bits per byte): lower is better.
 
+## Use cases
+
+- Run Karpathy nanochat training on a MacBook Air
+- Autonomous AI research overnight on Apple Silicon
+- Train small GPT models without CUDA or NVIDIA GPU
+- Benchmark MLX vs PyTorch MPS on M1/M2/M3/M4 Macs
+- Let Claude Code or Codex iterate on a real LLM training loop
+- Reproduce nanochat on Mac Mini, MacBook Pro, or Mac Studio
+- Hands-off LLM hyperparameter search with a 5-minute time budget
+
 ## Architecture
 
 The model is a simplified single-device GPT, fully implemented in MLX with zero PyTorch dependency:
@@ -139,6 +153,22 @@ Each experiment takes about 5 minutes. That's roughly 12 experiments per hour, o
 ### What LLM agents work with autoresearch-mlx?
 
 Any coding agent that can read files and run shell commands works: Claude Code, OpenAI Codex, Cursor, or similar tools. Point the agent at `program.md` and it will handle the rest autonomously.
+
+### How do I run karpathy autoresearch on a Mac?
+
+Clone this repo, install [uv](https://docs.astral.sh/uv/), run `uv sync`, then `uv run prepare.py` followed by `uv run train.py`. That is the full setup for running karpathy autoresearch on a Mac. No CUDA toolkit, no driver install, no conda environment. See the Quick start section above.
+
+### Does autoresearch-mlx work without CUDA?
+
+Yes. autoresearch-mlx has zero CUDA and zero NVIDIA dependencies. It runs entirely on Apple's MLX framework and uses the Apple Silicon GPU through unified memory. If your machine can run macOS on M1/M2/M3/M4, it can run autoresearch-mlx.
+
+### What's the minimum Mac for running autoresearch-mlx?
+
+An 8GB M1 MacBook Air is the documented minimum and the default benchmark target. Bigger Macs (16GB, 32GB, 64GB, 192GB Mac Studio) let you scale `DEPTH` and `DEVICE_BATCH_SIZE` for larger models, but the 5-minute training loop works on entry-level Apple Silicon out of the box.
+
+### Can I use Claude Code or Codex with autoresearch-mlx?
+
+Yes. Claude Code and OpenAI Codex are the two primary supported agents. Open this repo in either tool, point it at `program.md`, and the agent will read the instructions, establish a baseline, and iterate on `train.py` autonomously. Any agent with file edit and shell access works the same way.
 
 ## License
 
